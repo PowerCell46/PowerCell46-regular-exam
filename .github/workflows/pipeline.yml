@@ -1,4 +1,4 @@
-name: Build Test and Deploy
+name: Build and Test
 
 on:
   push:
@@ -7,26 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build_test:
-
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout the repository on the machine
       uses: actions/checkout@v3
-      
-    - name: Use Node.js version 21.x
+
+    - name: Use Node.js18.x
       uses: actions/setup-node@v3
       with:
-        node-version: 21.x
+        node-version: 18.x
         cache: 'npm'
-
-    - name: Install the dependencies
-      run: npm install
-
-    - name: Run unit tests
-      run: npm run test:unit
-
-    - name: Display Softuni username
-      run: echo "PowerCell46"
     
+    - name: Install project dependencies
+      run: npm install
+    
+    - name: Run unit tests for the application
+      run: npm run test:unit
